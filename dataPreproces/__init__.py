@@ -486,4 +486,6 @@ print("Valores distintos entre las columnas:", valores_distintos)
 print('Hola')
 
 
+print('Hola chicos')
+
 
