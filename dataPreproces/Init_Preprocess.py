@@ -13,11 +13,12 @@ import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 
+pip install seaborn
 
 # In[2]:
 
 
-dataset = pd.read_csv(r"C:\Users\amari\OneDrive\Documentos\GitHub\TFM_Back\data\Crime_Data_from_2020_to_Present.csv")
+dataset = pd.read_csv(r"C:\Users\Sarahi Flores\Documents\GitHub\TFM_Back\data\Crime_Data_from_2020_to_Present (1)")
 
 
 # In[3]:
