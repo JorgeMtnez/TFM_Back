@@ -17,7 +17,7 @@ import matplotlib.pyplot as plt
 # In[2]:
 
 
-dataset = pd.read_csv(r"C:\Users\Brigitte\Documents\master\tfm_dataset\Crime_Data_from_2020_to_Present.csv")
+dataset = pd.read_csv(r"C:\Users\amari\OneDrive\Documentos\GitHub\TFM_Back\data\Crime_Data_from_2020_to_Present.csv")
 
 
 # In[3]:
@@ -525,53 +525,53 @@ print("Valores distintos entre las columnas:", valores_distintos)
 # In[ ]:
 
 
-907 has ta 20 años de prisión secuestro
-921 trafico de personas de 20 - 30 años 
-922 robo de un menor de 16 meses a 3 años. leve 
-924 0 a 6 meses infraccion delto leve
-928 amenzas telefo del leves
-930 del leves
+#907 has ta 20 años de prisión secuestro
+#921 trafico de personas de 20 - 30 años
+#922 robo de un menor de 16 meses a 3 años. leve
+#924 0 a 6 meses infraccion delto leve
+#928 amenzas telefo del leves
+#930 del leves
 
 
 # In[ ]:
 
 
 #Cadena perpetua p hasta 20 años..
-del_muy_graves = dataset_sin_duplicados[Crm Cd[110, 121, 235, 900,  907, 921, 860, 822,  ]]
+#del_muy_graves = dataset_sin_duplicados[Crm Cd[110, 121, 235, 900,  907, 921, 860, 822,  ]]
 
 
 # In[ ]:
 
 
 # de 5 a 19
-del_graves = dataset_sin_duplicados[Crm Cd[113, 122, 210, 220, 230, 231,236, 237, 250, 251, 354, 433, 434, 940, 942, 944,
-                                           954, 956, 470, 473, 870, 845, 840, 820, 815, 814, 626, 627, 648, 805, 762, 761,
-                                          760, 756, 755,   ]]
+#del_graves = dataset_sin_duplicados[Crm Cd[113, 122, 210, 220, 230, 231,236, 237, 250, 251, 354, 433, 434, 940, 942, 944,
+ #                                          954, 956, 470, 473, 870, 845, 840, 820, 815, 814, 626, 627, 648, 805, 762, 761,
+ #                                         760, 756, 755,   ]]
 
 
 # In[ ]:
 
 
 #de 1 a 5
-del_menos_graves = dataset_sin_duplicados[Crm Cd[310,330, 331, 341, 343, 345, 347, 349, 410, 420, 421, 901, 902, 435, 
-                                                 903, 436, 904, 931, 943, 446, 350, 450, 946, 948, 949, 950, 951, 475, 622,
-                                                 865, 830, 821, 625, 624, 647, 810, 649, 763, 661, 662, 668, 740   ]]
+#del_menos_graves = dataset_sin_duplicados[Crm Cd[310,330, 331, 341, 343, 345, 347, 349, 410, 420, 421, 901, 902, 435,
+ #                                                903, 436, 904, 931, 943, 446, 350, 450, 946, 948, 949, 950, 951, 475, 622,
+ #                                                865, 830, 821, 625, 624, 647, 810, 649, 763, 661, 662, 668, 740   ]]
 
 
 # In[ ]:
 
 
 #menos de un año
-del_leves = dataset_sin_duplicados[Crm Cd[320, 351, 352, 353, 432, 437, 438, 906, 924, 928, 930, 439, 932, 440, 441, 442, 
-                                          443, 444, 445, 451, 452, 471,474, 480, 485, 890, 888, 487, 510, 520, 522, 882, 623,
-                                         , 880, 850, 651, 653, 652, 654, 660, 664, 666, 670, 753, 745,   ]]
+#del_leves = dataset_sin_duplicados[Crm Cd[320, 351, 352, 353, 432, 437, 438, 906, 924, 928, 930, 439, 932, 440, 441, 442,
+  #                                        443, 444, 445, 451, 452, 471,474, 480, 485, 890, 888, 487, 510, 520, 522, 882, 623,
+  #                                       , 880, 850, 651, 653, 652, 654, 660, 664, 666, 670, 753, 745,   ]]
 
 
 # In[ ]:
 
 
 #Meses
-infracciones = dataset_sin_duplicados[Crm Cd[933, 886, 884, 813, 812, 806,    ]]
+#infracciones = dataset_sin_duplicados[Crm Cd[933, 886, 884, 813, 812, 806,    ]]
 
 # Convertir las columnas en conjuntos y encontrar los valores distintos
 valores_distintos_col1 = set(dataset['Crm Cd'])
