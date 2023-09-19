@@ -1,3 +1,13 @@
+def hacer_prediccion(datos):
+    # Cargar el modelo entrenado desde un archivo pickle
+    with open('\GitHub\TFM_Back\dataModeling', 'rb') as archivo_modelo:
+        modelo = pickle.load(archivo_modelo)
+
+    # Realizar la predicción utilizando el modelo
+    prediccion = modelo.predict(datos)
+
+    return prediccion
+
 app = Flask(__name__)
 
 @app.route('/buscar_peligrosidad', methods=['POST']) 
@@ -13,12 +23,3 @@ def buscar_peligrosidad():
 
 if _name_ == '__main__':
     app.run()
-def hacer_prediccion(datos):
-    # Cargar el modelo entrenado desde un archivo pickle
-    with open('C:\\Users\\amari\\Documents\\TFM Final\\modelo_ejecutable.pkl', 'rb') as archivo_modelo:
-        modelo = pickle.load(archivo_modelo)
-
-    # Realizar la predicción utilizando el modelo
-    prediccion = modelo.predict(datos)
-
-    return prediccion
