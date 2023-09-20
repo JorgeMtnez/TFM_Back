@@ -13,6 +13,22 @@ def index():
     url = request.args.get('url')
     return " --> FUNCIONA" + str(url)
 
+@app.route('/getColor', methods=['POST'])
+@cross_origin(origin='*', headers=['Content-Type'])
+def index():
+    zicode = request.args.get('zipcode')
+    if zicode == "90027":
+        return "#c99d24"
+    elif zicode == "90007":
+        return "#fafa64"
+    elif zicode == "90006":
+        return "#a0c29b"
+    elif zicode == "90005":
+        return "#2892c7"
+    elif zicode == "90004":
+        return "#e81014"
+    # return " --> FUNCIONA" + str(url)
+
 @app.route('/buscar_peligrosidad', methods=['POST'])
 @cross_origin(origin='*', headers=['Content-Type'])
 def buscar_peligrosidad():
