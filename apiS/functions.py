@@ -3,25 +3,44 @@ import pandas as pd
 import xgboost
 
 def hacer_prediccion(datos):
-    print(datos.head())
+
+    print("/////////////////")
     # Cargar el modelo entrenado desde un archivo pickle
-    with open('../dataModeling/modelo_definiivo.pkl', 'rb') as archivo_modelo:
+    with open('../dataModeling/finalPickel.pkl', 'rb') as archivo_modelo:
         modelo = pickle.load(archivo_modelo)
 
     # Realizar la predicción utilizando el modelo
     prediccion = modelo.predict(datos)
+    data = []
+    newDf = pd.DataFrame(data)
+    df = pd.read_csv('../data/datos_entrada_modelo_ejemplo.csv', sep=';')
+    newDf['zipcode'] = df['ZipCode']
+    newDf['nivel'] = prediccion
 
-    return prediccion
+    return newDf
 
 
 def inputDataModel(victAge, victSex, victRace, mesDelito, franjaHoraria):
     df = pd.read_csv('../data/datos_entrada_modelo_ejemplo.csv', sep=';')
-    df['victAge'] = victAge
-    df['victSex'] = victSex
-    df['victRace'] = victRace
-    df['mesDelito'] = mesDelito
-    df['franjaHoraria'] = franjaHoraria
+    df['VictAge'] = int(victAge)
+    df['VictSex'] = victSex
+    df['VictRace'] = victRace
+    df['MesDelito'] = int(mesDelito)
+    df['Franja_Horaria'] = int(franjaHoraria)
+    print('/////////////////////')
+    df['VictRace'] = df['VictRace'].replace(['Asian'], 1)
+    df['VictRace'] = df['VictRace'].replace(['North American'], 2)
+    df['VictRace'] = df['VictRace'].replace(['African'], 3)
+    df['VictRace'] = df['VictRace'].replace(['Latin American'], 4)
+    df['VictRace'] = df['VictRace'].replace(['UNK'], 5)
+
+    df['VictSex'] = df['VictSex'].replace(['M'], 1)
+    df['VictSex'] = df['VictSex'].replace(['F'], 2)
+    df['VictSex'] = df['VictSex'].replace(['X'], 3)
+
     print(df.head())
+    print(df.info())
+    print(list(df))
     return df
 
 
@@ -45,8 +64,13 @@ def getColor(zipcode):
     print(nivel.iloc[0])
     return nivel
 
+
+mapeo_VictRace = {'Asian': 1 ,'North American' : 2,'African' : 3,'Latin American' : 4,'Otros' : 5}
+
 if __name__ == '__main__':
     print()
-    # inputDataModel()
-    buscar_peligrosidadTest("23", "M", "African", "08", "4")
+    # inputDataModel("23", "M", "African", "08", "4")
+    # print(hacer_prediccion(inputDataModel("23", "M", "African", "08", "4")))
+
+    hacer_prediccion(inputDataModel("23", "M", "African", "08", "4")).to_csv('../data/resultPredict.csv', index=False)
     # getColor(90005)

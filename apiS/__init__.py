@@ -35,17 +35,17 @@ def after_request(response):
 @app.route('/getColor', methods=['GET'])
 def coloring():  # only for testingz
     print("im here")
-    zicode = request.args.get('zipcode')
-    nivel = getColor(zicode)
-    if nivel == 1:
+    zipcode = request.args.get('zipcode')
+    nivel = getColor(zipcode)
+    if nivel == 0:
         return {"data": "6ac728"}
-    elif nivel == 2:
+    elif nivel == 1:
         return {"data": "e9fc17"}
-    elif nivel == 3:
+    elif nivel == 2:
         return {"data": "fcb717"}
-    elif nivel == 4:
+    elif nivel == 3:
         return {"data": "fc6b17"}
-    elif nivel == 5:
+    elif nivel == 4:
         return {"data": "fc1717"}
     else:
         return {"data": "fc1717"}
