@@ -3,19 +3,24 @@ from flask_cors import CORS, cross_origin
 from functions import hacer_prediccion
 
 app = Flask(__name__)
-cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
-app.config['CORS_HEADERS'] = 'Content-Type'
+# cors = CORS(app)
+CORS(app, resources={r"/getColor": {"origins": "http://localhost:4200"}})
+# app.config['CORS_HEADERS'] = 'Content-Type'
 
+@app.after_request
+def after_request(response):
+    response.headers.add('Access-Control-Allow-Origin', 'http://localhost:4200')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+    response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
+    return response
 
-@app.route('/test', methods=['POST'])
-@cross_origin(origin='*', headers=['Content-Type'])
-def index():
-    url = request.args.get('url')
-    return " --> FUNCIONA" + str(url)
+# @app.route('/test', methods=['POST'])
+# def index():
+#     url = request.args.get('url')
+#     return " --> FUNCIONA" + str(url)
 
 
 @app.route('/getColor', methods=['GET'])
-@cross_origin()
 def coloring():  # only for testingz
     print("im here")
     zicode = request.args.get('zipcode')
@@ -27,24 +32,23 @@ def coloring():  # only for testingz
         return {"data": "fcb717"}
     elif zicode == "90005":
         return {"data": "fc6b17"}
-    elif zicode == "90004":
+    elif zicode == "90003":
         return {"data": "fc1717"}
     else:
         return {"data": "fc1717"}
     # return " --> FUNCIONA" + str(url)
 
 
-@app.route('/buscar_peligrosidad', methods=['POST'])
-@cross_origin(origin='*', headers=['Content-Type'])
-def buscar_peligrosidad():
-    # Obtener los datos del formulario enviado
-    datos = request.form['datos_usuario']
-
-    # Llamar a la función de predicción
-    resultado_prediccion = hacer_prediccion(datos)
-
-    # Devolver la predicción al frontend en formato JSON
-    return jsonify({'prediccion': resultado_prediccion})
+# @app.route('/buscar_peligrosidad', methods=['POST'])
+# def buscar_peligrosidad():
+#     # Obtener los datos del formulario enviado
+#     datos = request.form['datos_usuario']
+#
+#     # Llamar a la función de predicción
+#     resultado_prediccion = hacer_prediccion(datos)
+#
+#     # Devolver la predicción al frontend en formato JSON
+#     return jsonify({'prediccion': resultado_prediccion})
 
 
 if __name__ == '__main__':
