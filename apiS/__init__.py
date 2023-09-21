@@ -66,13 +66,22 @@ def buscar_peligrosidad():
     else:
         raze = request.args.get('victRace')
 
+    if int(request.args.get('franjaHoraria')) >= 0 and int(request.args.get('franjaHoraria')) <= 6:
+        franja = 4
+    elif int(request.args.get('franjaHoraria')) > 6 and int(request.args.get('franjaHoraria')) <= 12:
+        franja = 1
+    elif int(request.args.get('franjaHoraria')) > 12 and int(request.args.get('franjaHoraria')) <= 16:
+        franja = 2
+    else:
+        franja = 3
+
 
     datos = inputDataModel(
         request.args.get('victAge'),
         sex,
         raze,
         request.args.get('mesDelito'),
-        request.args.get('franjaHoraria')
+        franja
     )
 
     # Llamar a la función de predicción
