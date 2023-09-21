@@ -1,6 +1,6 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, json
 from flask_cors import CORS, cross_origin
-from functions import hacer_prediccion
+from functions import hacer_prediccion, inputDataModel, getColor
 
 app = Flask(__name__)
 # cors = CORS(app)
@@ -14,41 +14,64 @@ def after_request(response):
     response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
     return response
 
-# @app.route('/test', methods=['POST'])
-# def index():
-#     url = request.args.get('url')
-#     return " --> FUNCIONA" + str(url)
-
+# @app.route('/getColor', methods=['GET'])
+# def coloring():  # only for testingz
+#     print("im here")
+#     zicode = request.args.get('zipcode')
+#     if zicode == "90027":
+#         return {"data": "6ac728"}
+#     elif zicode == "90007":
+#         return {"data": "e9fc17"}
+#     elif zicode == "90006":
+#         return {"data": "fcb717"}
+#     elif zicode == "90005":
+#         return {"data": "fc6b17"}
+#     elif zicode == "90003":
+#         return {"data": "fc1717"}
+#     else:
+#         return {"data": "fc1717"}
+#     # return " --> FUNCIONA" + str(url)
 
 @app.route('/getColor', methods=['GET'])
 def coloring():  # only for testingz
     print("im here")
     zicode = request.args.get('zipcode')
-    if zicode == "90027":
+    nivel = getColor(zicode)
+    if nivel == 1:
         return {"data": "6ac728"}
-    elif zicode == "90007":
+    elif nivel == 2:
         return {"data": "e9fc17"}
-    elif zicode == "90006":
+    elif nivel == 3:
         return {"data": "fcb717"}
-    elif zicode == "90005":
+    elif nivel == 4:
         return {"data": "fc6b17"}
-    elif zicode == "90003":
+    elif nivel == 5:
         return {"data": "fc1717"}
     else:
         return {"data": "fc1717"}
     # return " --> FUNCIONA" + str(url)
 
 
-# @app.route('/buscar_peligrosidad', methods=['POST'])
-# def buscar_peligrosidad():
-#     # Obtener los datos del formulario enviado
-#     datos = request.form['datos_usuario']
-#
-#     # Llamar a la función de predicción
-#     resultado_prediccion = hacer_prediccion(datos)
-#
-#     # Devolver la predicción al frontend en formato JSON
-#     return jsonify({'prediccion': resultado_prediccion})
+@app.route('/buscar_peligrosidad', methods=['GET'])
+def buscar_peligrosidad():
+    # Obtener los datos del formulario enviado
+    # datos = request.form['datos_usuario']
+    datos = inputDataModel(
+        request.args.get('victAge'),
+        request.args.get('victSex'),
+        request.args.get('victRace'),
+        request.args.get('mesDelito'),
+        request.args.get('franjaHoraria')
+    )
+
+    # Llamar a la función de predicción
+    resultado_prediccion = hacer_prediccion(datos)
+    resultado_prediccion.to_csv('../data/resultPredict.csv', index=False)
+
+    # Devolver la predicción al frontend en formato JSON
+    # return jsonify({'prediccion': resultado_prediccion})
+
+    return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
 
 
 if __name__ == '__main__':
