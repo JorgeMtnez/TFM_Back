@@ -56,10 +56,21 @@ def coloring():  # only for testingz
 def buscar_peligrosidad():
     # Obtener los datos del formulario enviado
     # datos = request.form['datos_usuario']
+    if request.args.get('victSex') == 'No comment':
+        sex = 'X'
+    else:
+        sex = request.args.get('victSex')
+
+    if request.args.get('victRace') == 'Other':
+        raze = 'UNK'
+    else:
+        raze = request.args.get('victRace')
+
+
     datos = inputDataModel(
         request.args.get('victAge'),
-        request.args.get('victSex'),
-        request.args.get('victRace'),
+        sex,
+        raze,
         request.args.get('mesDelito'),
         request.args.get('franjaHoraria')
     )

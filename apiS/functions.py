@@ -3,6 +3,7 @@ import pandas as pd
 import xgboost
 
 def hacer_prediccion(datos):
+    print(datos.head())
     # Cargar el modelo entrenado desde un archivo pickle
     with open('../dataModeling/modelo_definiivo.pkl', 'rb') as archivo_modelo:
         modelo = pickle.load(archivo_modelo)
@@ -47,5 +48,5 @@ def getColor(zipcode):
 if __name__ == '__main__':
     print()
     # inputDataModel()
-    # buscar_peligrosidadTest("23", "M", "African", "08", "4")
+    buscar_peligrosidadTest("23", "M", "African", "08", "4")
     # getColor(90005)
